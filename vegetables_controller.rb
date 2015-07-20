@@ -44,7 +44,7 @@ class VegetablesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy  #not delete
     @vegetable = Vegetable.find(params[:id])
     #I'll just add an if/else statement with flash msg in case of errors
     if @vegetable.destroy
