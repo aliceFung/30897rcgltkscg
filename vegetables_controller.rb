@@ -22,19 +22,20 @@ class VegetablesController < ApplicationController
       flash.now[:error] = "Aww, that veggie wasn't created."
       render :new
     end
-    #should be part of if/else statement, also can just re-render and not lose the info already written and potential helpful error msgs
+    #should be part of if/else statement. two redirects may cause errors
+    #also can just re-render and not lose the info already written and potential helpful error msgs, if used in view
     # redirect_to :new #render :new
   end
 
   def edit
-    #only needs id here to find this model instance
+    #only needs id here to find this model instance, like in show
     @vegetable = Vegetable.find(params[:id])
   end
 
   def update
     #do not need a new vegetable instance, just find the one that's updating
     @vegetable = Vegetable.find(params[:id])
-    if @vegetable.update(whitelisted_vegetable_params) #needs the params here
+    if @vegetable.update(whitelisted_vegetable_params) #needs the params here to get updated info from edit form
       flash[:success] = "A new twist on an old favorite!"
       redirect_to @vegetable
     else
